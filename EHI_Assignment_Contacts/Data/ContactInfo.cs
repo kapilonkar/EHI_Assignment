@@ -50,18 +50,22 @@ namespace EHI_Assignment_Contacts.Data
         {   
             JSONReadWrite readWrite = new JSONReadWrite();
             List<ContactViewModel> contacts = JsonConvert.DeserializeObject<List<ContactViewModel>>(readWrite.Read("contacts.json", "data"));
-
+            
             if (contacts == null)
             {
                 contacts = new List<ContactViewModel>();
             }
 
+            // get lastly inserted index- Id
             int index = contacts.Max(c => c.Id);
 
+            // Increment by one
             model.Id = index + 1;
 
+            // add to collection
             contacts.Add(model);
 
+            // write to json
             string jSONString = JsonConvert.SerializeObject(contacts);
             readWrite.Write("contacts.json", "data", jSONString);
 
@@ -84,9 +88,11 @@ namespace EHI_Assignment_Contacts.Data
                 contacts = new List<ContactViewModel>();
             }
 
+            // find by id and update record
             int index = contacts.FindIndex(x => x.Id == model.Id);
             contacts[index] = model;
 
+            // write to json
             string jSONString = JsonConvert.SerializeObject(contacts);
             readWrite.Write("contacts.json", "data", jSONString);
 
@@ -104,14 +110,15 @@ namespace EHI_Assignment_Contacts.Data
             JSONReadWrite readWrite = new JSONReadWrite();
             contacts = JsonConvert.DeserializeObject<List<ContactViewModel>>(readWrite.Read("contacts.json", "data"));
 
+            // find by id and remove record
             int index = contacts.FindIndex(x => x.Id == id);
             contacts.RemoveAt(index);
 
+            // write to json
             string jSONString = JsonConvert.SerializeObject(contacts);
             readWrite.Write("contacts.json", "data", jSONString);
 
             return true;
-
         }
     }
 }

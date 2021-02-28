@@ -10,6 +10,12 @@ namespace EHI_Assignment_Contacts.Data
     {
         public JSONReadWrite() { }
 
+        /// <summary>
+        /// Read json file from root
+        /// </summary>
+        /// <param name="fileName">file name</param>
+        /// <param name="location">path</param>
+        /// <returns>son content</returns>
         public string Read(string fileName, string location)
         {
             string root = "wwwroot";
@@ -25,9 +31,16 @@ namespace EHI_Assignment_Contacts.Data
             {
                 jsonResult = streamReader.ReadToEnd();
             }
+
             return jsonResult;
         }
 
+        /// <summary>
+        /// Write json file from root
+        /// </summary>
+        /// <param name="fileName">file name</param>
+        /// <param name="location">path</param>
+        /// <param name="jSONString">son content</param>
         public void Write(string fileName, string location, string jSONString)
         {
             string root = "wwwroot";
